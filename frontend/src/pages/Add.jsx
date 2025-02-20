@@ -20,7 +20,7 @@ export function Add() {
       return toast.error("Enter a valid amount greater than 0");
     if (date.trim() === "") return toast.error("Date is required");
     try {
-        const response = await axios.post("http://localhost:3000/api/v1/expense/add", {
+        const response = await axios.post("https://expense-tracker-backend-pqny.onrender.com/api/v1/expense/add", {
          name:name,
          amount:amount*100,
          date:date,

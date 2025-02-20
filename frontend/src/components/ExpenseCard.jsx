@@ -19,7 +19,7 @@ export function ExpenseCard({ header, description, amount, id, category }) {
 
     async function handleDelete() {
         try {
-            await axios.delete(`http://localhost:3000/api/v1/expense/delete/${id}`);
+            await axios.delete(`https://expense-tracker-backend-pqny.onrender.com/api/v1/expense/delete/${id}`);
             toast.success("Expense Deleted Successfully");
             window.location.reload();
         } catch (error) {
@@ -30,7 +30,7 @@ export function ExpenseCard({ header, description, amount, id, category }) {
 
     async function handleSave() {
         try {
-            await axios.put(`http://localhost:3000/api/v1/expense/edit/${id}`, {
+            await axios.put(`https://expense-tracker-backend-pqny.onrender.com/api/v1/expense/edit/${id}`, {
                 name: editedHeader,
                 description: editedDescription,
                 amount: editedAmount*100,

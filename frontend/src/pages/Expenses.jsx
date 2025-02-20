@@ -9,7 +9,7 @@ export function Expenses() {
     useEffect(() => {
         async function fetchExpenses() {
             try {
-                const response = await axios.get("http://localhost:3000/api/v1/expense/get-expenses");
+                const response = await axios.get("https://expense-tracker-backend-pqny.onrender.com/api/v1/expense/get-expenses");
                 const sortedExpenses = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
                 setExpenses(sortedExpenses);
             } catch (error) {

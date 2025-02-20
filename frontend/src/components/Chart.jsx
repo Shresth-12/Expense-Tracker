@@ -8,7 +8,7 @@ export function MonthlyExpensesChart() {
   useEffect(() => {
     const fetchExpenses = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/v1/expense/monthly-expenses");
+        const response = await axios.get("https://expense-tracker-backend-pqny.onrender.com/api/v1/expense/monthly-expenses");
         setData(response.data);
       } catch (error) {
         console.error("Error fetching expenses:", error);
