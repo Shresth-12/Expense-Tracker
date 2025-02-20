@@ -9,6 +9,8 @@ export function Add() {
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
+  const [category, setCategory] = useState("Food");
+  const categories = ["Food", "Transport", "Shopping", "Bills", "Entertainment", "Other"];
   const navigate = useNavigate();
 
   async function handleSubmit(event) {
@@ -17,13 +19,13 @@ export function Add() {
     if (amount.trim() === "" || isNaN(amount) || Number(amount) <= 0)
       return toast.error("Enter a valid amount greater than 0");
     if (date.trim() === "") return toast.error("Date is required");
-    if (description.trim() === "") return toast.error("Description is required");
     try {
         const response = await axios.post("http://localhost:3000/api/v1/expense/add", {
          name:name,
          amount:amount*100,
          date:date,
-         description:description
+         description:description,
+         category:category
         });
         toast.success("Expense added successfully!");
         setName("");
@@ -66,6 +68,13 @@ export function Add() {
           value={date}
           onChange={(e) => setDate(e.target.value)}
         />
+                <label className="block text-gray-600 mt-4">Category</label>
+        <select  value={category} 
+        onChange={(e) => setCategory(e.target.value)} className="select">
+   {categories.map((cat) => (
+          <option key={cat} value={cat}>{cat}</option>
+        ))}
+</select>
         <label className="block text-gray-600 mt-4">Description</label>
         <textarea
           className="textarea textarea-bordered w-full"

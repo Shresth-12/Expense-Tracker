@@ -8,11 +8,13 @@ router.post("/add",async (req,res)=>{
         const amount=req.body.amount
         const date=req.body.date
         const description=req.body.description
+        const category=req.body.category
         const expense=await Expense.create({
             name:name,
             amount:amount,
             date:date,
-            description:description
+            description:description,
+            category:category
           })
           return res.json({
               message:"Expense Saved",
@@ -39,9 +41,10 @@ router.put("/edit/:id", async (req, res) => {
         const amount=req.body.amount
         const date=req.body.date
         const description=req.body.description
+        const category=req.body.category
         const updatedExpense = await Expense.findByIdAndUpdate(
             id,
-            {name, amount, date, description },
+            {name, amount, date, description ,category },
             { new: true }
         );
         if (!updatedExpense) {

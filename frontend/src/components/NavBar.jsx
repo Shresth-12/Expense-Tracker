@@ -11,9 +11,8 @@ export function NavBar()
         <ul
           tabIndex={0}
           class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-          <li><a>Item 1</a></li>
-          <li><a>Item 1</a></li>
-          <li><a>Item 3</a></li>
+           <li><a  onClick={()=>{navigate("/add")}}>Add Expense</a></li>
+           <li><a onClick={()=>{navigate("/all")}}>Show All Expenses</a></li>
         </ul>
       </div>
       <a className="btn btn-ghost text-xl"onClick={()=>{navigate("/")}} >Expense<span className="text-blue-600" >Tracker</span></a>

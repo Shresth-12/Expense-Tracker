@@ -2,11 +2,20 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 
-export function ExpenseCard({ header, description, amount, id }) {
+export function ExpenseCard({ header, description, amount, id, category }) {
     const [isEditing, setIsEditing] = useState(false);
     const [editedHeader, setEditedHeader] = useState(header);
     const [editedDescription, setEditedDescription] = useState(description);
     const [editedAmount, setEditedAmount] = useState(amount/100);
+    const [editedCategory, setEditedCategory] = useState(category);
+    const categoryColors = {
+        Food: "bg-green-100 text-green-700",
+        Transport: "bg-yellow-100 text-yellow-700",
+        Shopping: "bg-purple-100 text-purple-700",
+        Bills: "bg-red-100 text-red-700",
+        Entertainment: "bg-blue-100 text-blue-700",
+        Other: "bg-gray-100 text-gray-700",
+    };
 
     async function handleDelete() {
         try {
@@ -24,7 +33,8 @@ export function ExpenseCard({ header, description, amount, id }) {
             await axios.put(`http://localhost:3000/api/v1/expense/edit/${id}`, {
                 name: editedHeader,
                 description: editedDescription,
-                amount: editedAmount*100
+                amount: editedAmount*100,
+                category:editedCategory
             });
             toast.success("Expense Updated Successfully");
             setIsEditing(false);
@@ -59,6 +69,17 @@ export function ExpenseCard({ header, description, amount, id }) {
                         className="w-full p-2 border rounded mb-2"
                         placeholder="Description"
                     />
+                     <select
+                        value={editedCategory}
+                        onChange={(e) => setEditedCategory(e.target.value)}
+                        className="w-full p-2 border rounded mb-2"
+                    >
+                        {Object.keys(categoryColors).map((cat) => (
+                            <option key={cat} value={cat}>
+                                {cat}
+                            </option>
+                        ))}
+                    </select>
                 </div>
             ) : (
                 <>
@@ -67,6 +88,9 @@ export function ExpenseCard({ header, description, amount, id }) {
                         <h2 className="text-lg font-bold text-blue-600">Rs. {amount/100}</h2>
                     </div>
                     <p className="text-gray-600 mt-2">{description}</p>
+                    <div className={`inline-block px-3 py-1 text-sm font-medium rounded-full mt-2 ${categoryColors[category]}`}>
+                        {category}
+                    </div>
                 </>
             )}
             <div className="flex justify-end gap-2 mt-4">

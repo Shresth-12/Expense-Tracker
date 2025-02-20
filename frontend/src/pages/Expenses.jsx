@@ -24,7 +24,7 @@ export function Expenses() {
             <NavBar />
             <div className="mt-4 ml-4 flex flex-wrap gap-4 justify-center">
                 {expenses.map((expense, index) => (
-                    <ExpenseCard key={index} id={expense._id} header={expense.name} amount={expense.amount} description={expense.description} />
+                    <ExpenseCard key={index} id={expense._id} header={expense.name} amount={expense.amount} description={expense.description} category={expense.category} />
                 ))}
             </div>
         </div>
